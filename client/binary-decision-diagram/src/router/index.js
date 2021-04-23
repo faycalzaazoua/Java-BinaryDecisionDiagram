@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../page/home.vue'
 import DDB from '../page/ddb.vue'
-import ProjectList from '../page/project.vue'
+import Project from '../page/project.vue'
 
 const routes = [
   {
@@ -15,9 +15,9 @@ const routes = [
     component: DDB
   },
   {
-    path: '/projectlist',
-    name: 'ProjectList',
-    component: ProjectList
+    path: '/project',
+    name: 'Project',
+    component: Project
   },
 ]
 

@@ -2,12 +2,14 @@
   <div class="my-24">
     <h1 class="text-5xl">Diagramme de décision binaire</h1>
   </div>
-  <div class="w-full flex justify-center">
-    <div class="grid grid-cols-1 space-y-28 w-full mx-40">
-      <div>
-          <input class="w-full tracking-wide py-2 px-4 leading-relaxed appearance-none block bg-white border border-red-500 rounded focus:outline-none focus:via-pink-600 focus:bg-gray-100 focus:border-red-800 focus:border-8" 
-          type="text" v-model="search" placeholder="Veuillez entrer votre expression..."/>
-      </div>
+  <div class="mx-20 h-96 rounded-xl border-gray-200 border shadow-xl space-y-1.5 p-5">
+    <div class="w-full Button bg-gray-200 text-black flex justify-between">
+      <span>Hello Dear</span>
+      <span>20/05/2020</span>
+    </div>
+    <div class="w-full Button bg-gray-200 text-black flex justify-between">
+      <span>Hello Dear</span>
+      <span>20/10/2020</span>
     </div>
   </div>
 </template>
@@ -22,12 +24,5 @@ export default {
 </script>
 
 <style>
-    #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-    }
+
 </style>
