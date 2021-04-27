@@ -1,7 +1,9 @@
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.io.IOException;
+package serveur.sauvegarde;
 
+import serveur.construction.DDB;
+
+import java.lang.NullPointerException;
+import java.io.File;
 
 public class Sauvegarde
 {
@@ -10,23 +12,23 @@ public class Sauvegarde
 	public String nomProjet;
 	public String etatDDB;
 
+	public Sauvegarde() {}
+
 	public Sauvegarde(DDB aInitial, String nomProjet, String etatDDB)
 	{
 		this.objetDDB = aInitial;
 		this.nomProjet = nomProjet;
 		this.etatDDB = etatDDB;
 
-		this.nomProjet += "_save.json";
+		String chemin = "./" + this.nomProjet + "_save.json";
 
-		Path chemin = Paths.get(this.nomProjet);
 		try
 		{
-			createFile(chemin);
+			File saveFile = new File(chemin);
 
-		}catch(IOException fichierExistant)
+		}catch(NullPointerException cheminNull)
 		{
-			System.out.println("Erreur, fichier de sauvegarde existant.");
-			return;
+			System.out.println("Erreur, nom de fichier de sauvegarde nul.");
 		}
 		//write into json the DDB state
 
