@@ -2,9 +2,13 @@ package serveur.sauvegarde;
 
 import serveur.construction.DDB;
 
-import java.io.IOException;
 import java.lang.NullPointerException;
+
+import java.io.IOException;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.Writer;
+
 import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -26,10 +30,10 @@ public class Sauvegarde
 		/* Initialisation du nom de fichier final. */
 		String chemin = nomProjet + "_save.json";
 
+		/* Créer un fichier de sauvegarde dans le répertoire 'saves'. */
+		File saveFile = new File("saves",chemin);
 		try
 		{
-			/* Créer un fichier de sauvegarde dans le répertoire 'saves'. */
-			File saveFile = new File("saves",chemin);
 			boolean ret = saveFile.createNewFile();
 
 			if(!(ret))
@@ -37,10 +41,22 @@ public class Sauvegarde
 
 		}catch(NullPointerException | IOException x)
 		{
-			System.err.println("Erreur, nom de fichier de sauvegarde nul ou déplacement vers un dossier inexistant.");
+			System.err.println("Nom de fichier de sauvegarde nul/déplacement vers un dossier inexistant.");
 		}
-		//write into json the DDB state
 
+		//write into json the DDB state
+		FileWriter writerStream;
+		try
+		{
+			writerStream = new FileWriter(saveFile);
+			
+			String content = "{ \n \t \"" + "DDB" + "\" : { \n \t\t \"" ;
+			writerStream.write(content);
+		}
+		catch(IOException x)
+		{
+			System.err.format("%s no such%n", x);
+		}
 	}
 
 	public Sauvegarde(String nomProjet)
