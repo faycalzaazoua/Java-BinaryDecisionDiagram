@@ -32,6 +32,7 @@ public class Sauvegarde
 
 		/* Créer un fichier de sauvegarde dans le répertoire 'saves'. */
 		File saveFile = new File("saves",chemin);
+
 		try
 		{
 			boolean ret = saveFile.createNewFile();
@@ -39,23 +40,47 @@ public class Sauvegarde
 			if(!(ret))
 				System.out.println("Fichier déjà existant.");
 
-		}catch(NullPointerException | IOException x)
+		}
+		catch(NullPointerException | IOException x)
 		{
-			System.err.println("Nom de fichier de sauvegarde nul/déplacement vers un dossier inexistant.");
+			x.printStackTrace();
 		}
 
-		//write into json the DDB state
+		/* Écrire dans le fichier nomProjet_save.json le fichier de sauvegarde json. */
 		FileWriter writerStream;
+
 		try
 		{
 			writerStream = new FileWriter(saveFile);
 			
-			String content = "{ \n \t \"" + "DDB" + "\" : { \n \t\t \"" ;
+			String content = "{ \n \t"
+			       		+"\"DDB\""
+				       	+": { \n \t\t"
+				       	+"\"objetDDB\""
+					+": "
+					+"\""
+					+aInitial
+					+"\",\n\t\t"
+					+"\"nomProjet\""
+					+": "
+					+"\""
+					+nomProjet
+					+"\",\n\t\t"
+					+"\"etatDDB\""
+					+": "
+					+"\""
+					+etatDDB
+					+"\"\n\t}"
+					+"\n}";
+
+			/* Écrire la chaîne de caractères content. */
 			writerStream.write(content);
+			writerStream.flush();
+			writerStream.close();
 		}
 		catch(IOException x)
 		{
-			System.err.format("%s no such%n", x);
+			x.printStackTrace();
 		}
 	}
 
@@ -74,8 +99,61 @@ public class Sauvegarde
 
 		}catch(NullPointerException | IOException x)
 		{
-			System.err.println("Erreur, nom de fichier de sauvegarde nul ou déplacement vers un dossier inexistant.");
+			x.printStackTrace();
 		}
+	}
+
+	public void majSauvegarde(DDB nouveauDDB, String nomProjet, String nouvelEtat)
+	{
+		String chemin = nomProjet + "_save.json";
+
+		File saveFile = new File("saves",chemin);
+
+		/* Effacer le contenu du fichier original. */
+		
+		FileWriter writerStream;
+
+		try
+		{
+			writerStream = new FileWriter(saveFile);
+			String content = "";
+			writerStream.write(content);
+			writerStream.flush();
+
+			content = 	"{ \n \t"
+			       		+"\"DDB\""
+				       	+": { \n \t\t"
+				       	+"\"objetDDB\""
+					+": "
+					+"\""
+					+nouveauDDB
+					+"\",\n\t\t"
+					+"\"nomProjet\""
+					+": "
+					+"\""
+					+nomProjet
+					+"\",\n\t\t"
+					+"\"etatDDB\""
+					+": "
+					+"\""
+					+nouvelEtat
+					+"\"\n\t}"
+					+"\n}";
+
+			/* Écrire la chaîne de caractères content. */
+			writerStream.write(content);
+			writerStream.flush();
+			writerStream.close();
+		}
+		catch(IOException x)
+		{
+			x.printStackTrace();
+		}
+	}
+
+	public void restaurerSauvegarde(String nomProjet)
+	{
+
 	}
 
 	public void supprimerSauvegarde(String nomProjet)
@@ -92,15 +170,18 @@ public class Sauvegarde
 		try
 		{
 			Files.delete(Path.of("./saves"+"/"+chemin));
-		}catch(NoSuchFileException x)
+		}
+		catch(NoSuchFileException x)
 		{
-			System.err.format("%s: no such" + " file or directory%n", Path.of("./saves"+"/"+chemin));
-		}catch(DirectoryNotEmptyException x)
+			x.printStackTrace();
+		}
+		catch(DirectoryNotEmptyException x)
 		{
-			System.err.format("%s not empty%n", Path.of("./saves"+"/"+chemin));
-		}catch (IOException x)
+			x.printStackTrace();
+		}
+		catch (IOException x)
 		{
-			System.err.println(x);
+			x.printStackTrace();
 		}
 	}
 }
