@@ -7,5 +7,6 @@ public class Main
 		Sauvegarde s = new Sauvegarde(null, "test", "creation");
 		//s.majSauvegarde(null, "test", "creation1");
 		//s.supprimerSauvegarde("test");
+		//s.restaurerSauvegarde("test");
 	}
 }

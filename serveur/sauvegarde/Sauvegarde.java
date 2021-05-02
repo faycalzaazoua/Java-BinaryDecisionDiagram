@@ -5,8 +5,10 @@ import serveur.construction.DDB;
 import java.lang.NullPointerException;
 
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.Writer;
 
 import java.nio.file.DirectoryNotEmptyException;
@@ -153,7 +155,38 @@ public class Sauvegarde
 
 	public void restaurerSauvegarde(String nomProjet)
 	{
+		String path = "saves/" + nomProjet + "_save.json";
+		
+		try
+		{
+			FileReader readFile = new FileReader(path);	
+		}
+		catch(FileNotFoundException x)
+		{
+			x.printStackTrace();
+		}
 
+
+		try
+		{
+			char[] buffer = new char[128];
+			int i = 0;
+			buffer[0] = readFile.read();
+
+			while(buffer[i] != '}')
+			{
+				buffer[i] = readFile.read();
+
+				while(buffer[i] != '\"')
+				{
+					buffer[i] = readFile.read();
+				}
+			}
+		}
+		catch(IOException eOF)
+		{
+			eOF.printStackTrace();
+		}
 	}
 
 	public void supprimerSauvegarde(String nomProjet)
