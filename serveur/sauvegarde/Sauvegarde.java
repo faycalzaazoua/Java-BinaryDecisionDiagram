@@ -166,26 +166,19 @@ public class Sauvegarde
 			x.printStackTrace();
 		}
 
+		char[] buffer = new char[128];
+		int i = 0;
 
-		try
+		while(buffer[i] != '}')
 		{
-			char[] buffer = new char[128];
-			int i = 0;
-			buffer[0] = readFile.read();
-
-			while(buffer[i] != '}')
+			try
 			{
 				buffer[i] = readFile.read();
-
-				while(buffer[i] != '\"')
-				{
-					buffer[i] = readFile.read();
-				}
 			}
-		}
-		catch(IOException eOF)
-		{
-			eOF.printStackTrace();
+			catch(IOException eOF)
+			{
+				eOF.printStackTrace();
+			}
 		}
 	}
 
