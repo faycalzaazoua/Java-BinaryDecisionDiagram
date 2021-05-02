@@ -156,29 +156,23 @@ public class Sauvegarde
 	public void restaurerSauvegarde(String nomProjet)
 	{
 		String path = "saves/" + nomProjet + "_save.json";
-		
+
 		try
 		{
 			FileReader readFile = new FileReader(path);	
-		}
-		catch(FileNotFoundException x)
-		{
-			x.printStackTrace();
-		}
+			char[] buffer = new char[2048];
+			readFile.read(buffer);
 
-		char[] buffer = new char[128];
-		int i = 0;
-
-		while(buffer[i] != '}')
+				for(char test : buffer)
+				{
+					/*En gros tant que pas }, lire et extraire les champs du fichier*/
+				}
+				
+			readFile.close();
+		}
+		catch(IOException eOF)
 		{
-			try
-			{
-				buffer[i] = readFile.read();
-			}
-			catch(IOException eOF)
-			{
-				eOF.printStackTrace();
-			}
+			eOF.printStackTrace();
 		}
 	}
 
