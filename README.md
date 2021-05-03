@@ -15,7 +15,7 @@ Fayçal ZAAZOUA
 
 *********************************************************************
 
-Planning de programmation et de rendu :
+# Planning de programmation et de rendu :
 
 Semaine du 20/04 Programmation générique tous modules
 Semaine du 27/04 Programmation générique tous modules
