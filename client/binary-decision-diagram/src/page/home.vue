@@ -27,13 +27,15 @@
       </div>
     </div>
   </div>
-  <div class="p-10 m-20 flex justify-center rounded-xl border-gray-200 border shadow-xl">
-    <Tree
-      :json="data"
-      :class="{ landscape: landscape.length }"
-      @click-node="clickNode">
-    </Tree>
-  </div>
+  <transition-group name="fade">
+    <div v-if="showTree" class="p-10 m-20 flex justify-center rounded-xl border-gray-200 border shadow-xl">
+        <Tree
+          :json="data"
+          :class="{ landscape: landscape.length }"
+          @click-node="clickNode">
+        </Tree>
+    </div>
+  </transition-group>
 </template>
 
 <script>
@@ -46,6 +48,7 @@
 
     data() {
       return {
+        showTree: false,
         landscape: [],
         data: {
           name: "A",
@@ -112,6 +115,7 @@
     
     methods: {
       createBDD(){
+        this.showTree = !this.showTree
         if(this.expression) {
           console.log("Créer DDB")
           console.log(this.expression)
@@ -155,6 +159,16 @@
 </script>
 
 <style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
